@@ -1,0 +1,35 @@
+<?php
+ // module/Page/view/page/page/index.phtml:
+
+ $title = 'Pages';
+ $this->headTitle($title);
+ ?>
+ <h1><?php echo $this->escapeHtml($title); ?></h1>
+ <p>
+     <a href="<?php echo $this->url('page', array('action'=>'add'));?>">Add new page</a>
+ </p>
+
+ <table class="table">
+ <tr>
+     <th>Title</th>
+     <th>Published</th>
+     <th>Action</th>
+     <th>URL</tr>
+ </tr>
+ <?php foreach ($pages as $page) : ?>
+ <tr>
+     <td><?php echo $this->escapeHtml($page->title);?></td>
+     <td><?php if($this->escapeHtml($page->publish) == 0){ echo 'No';}else{ echo 'Yes';};?></td>
+     <td>
+         <a href="<?php echo $this->url('page',
+             array('action'=>'edit', 'id' => $page->id));?>">Edit</a>
+         <a href="<?php echo $this->url('page',
+             array('action'=>'delete', 'id' => $page->id));?>">Delete</a>
+     </td>
+
+     <td>
+<a href="<?php echo $this->escapeHtml($page->id);?>"><?php echo $this->escapeHtml($page->id);?></a>
+        </td>
+ </tr>
+ <?php endforeach; ?>
+ </table>

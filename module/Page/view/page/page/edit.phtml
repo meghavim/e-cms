@@ -1,0 +1,78 @@
+<?php
+ // module/Page/view/page/page/edit.phtml:
+$this->headScript()->appendFile('../../js/tinymce/js/tinymce/tinymce.min.js');
+
+
+ $title = 'Edit page';
+ $this->headTitle($title);
+ ?>
+ <h1><?php echo $this->escapeHtml($title); ?></h1>
+
+ <?php
+ $form = $this->form;
+ $form->setAttribute('action', $this->url(
+     'page',
+     array(
+         'action' => 'edit',
+         'id'     => $this->id,
+     )
+ ));
+ $form->prepare();
+
+ echo $this->form()->openTag($form);
+ echo $this->formHidden($form->get('id'));
+
+ ?>
+ <table cellspacing="5"  cellpadding="5">
+
+ 	<tr>
+ 		<td>
+ 			<?php  echo $this->formRow($form->get('title')); ?>
+
+ 		</td>
+ 	</tr>
+
+ 	<tr>
+ 		<td>
+ 			<?php  echo $this->formRow($form->get('description')); ?>
+ 		</td>
+ 	</tr>
+
+ 	<tr>
+ 		<td>
+ 			<?php  echo $this->formRow($form->get('publish'));?>
+ 		</td>
+ 	</tr>
+
+ 	<tr>
+ 		<td>
+ 			<?php  echo $this->formSubmit($form->get('submit'));?>
+ 		</td>
+ 	</tr>
+
+ 	
+ </table>
+
+ <?php 
+ echo $this->form()->closeTag();
+ ?>
+
+ <script type="text/javascript">
+tinymce.init({
+    selector: "textarea",
+    theme: "modern",
+    plugins: [
+        "advlist autolink lists link image charmap print preview hr anchor pagebreak",
+        "searchreplace wordcount visualblocks visualchars code fullscreen",
+        "insertdatetime media nonbreaking save table contextmenu directionality",
+        "emoticons template paste textcolor colorpicker textpattern"
+    ],
+    toolbar1: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
+    toolbar2: "print preview media | forecolor backcolor emoticons",
+    image_advtab: true,
+    templates: [
+        {title: 'Test template 1', content: 'Test 1'},
+        {title: 'Test template 2', content: 'Test 2'}
+    ]
+});
+</script>
