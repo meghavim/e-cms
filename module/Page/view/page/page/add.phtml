@@ -7,6 +7,7 @@ $this->headScript()->appendFile('../js/tinymce/js/tinymce/tinymce.min.js'); //ht
  $title = 'Add new page';
  $this->headTitle($title);
  ?>
+ <a href="<?php echo $this->url('page')?>">View Page</a>
  <h1><?php echo $this->escapeHtml($title); ?></h1>
  <?php
  $form->setAttribute('action', $this->url('page', array('action' => 'add')));

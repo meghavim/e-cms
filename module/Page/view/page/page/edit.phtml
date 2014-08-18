@@ -6,6 +6,8 @@ $this->headScript()->appendFile('../../js/tinymce/js/tinymce/tinymce.min.js');
  $title = 'Edit page';
  $this->headTitle($title);
  ?>
+ 
+ <a href="<?php echo $this->url('page')?>">View Page</a>
  <h1><?php echo $this->escapeHtml($title); ?></h1>
 
  <?php
