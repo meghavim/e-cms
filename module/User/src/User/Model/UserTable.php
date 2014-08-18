@@ -32,17 +32,49 @@ namespace User\Model;
      public function saveUser(User $user)
      {
          $data = array(
-             'email' => $user->email,
-             'password'  => $user->password,
-             'type'  => $user->type,
+             'e_email' => $user->e_email,
+             'e_password'  => md5($user->e_password),
+             'e_type'  => $user->e_type,
          );
+
+ // $data = array($user->email, md5($user->password), $user->type );
 
          $id = (int) $user->id;
          if ($id == 0) {
-             $this->tableGateway->insert($data);
+
+//try{
+
+               // Get adapter 
+        $dbAdapter = $this->tableGateway->getAdapter(); 
+
+        $stmt = $dbAdapter->createStatement(); 
+        $stmt->prepare('{CALL SP_E_USER_SAVE(?,?,?)}'); 
+        $stmt->getResource()->bindParam(1, $data['e_email'], \PDO::PARAM_STR); 
+    $stmt->getResource()->bindParam(2, $data['e_password']); 
+
+    $stmt->getResource()->bindParam(3, $data['e_type']); 
+       
+/*}
+catch (\Exception $e) {
+     $code = $e->getCode();
+    $msg  = $e->getMessage();
+    $file = $e->getFile();
+    $line = $e->getLine();
+    echo "$file:$line ERRNO:$code ERROR:$msg";          
+}*/
+
+ $stmt->execute();
+
+
+        // check is there any error in sql server query/procedure
+   //     $stmterror = $stmt->errorInfo();    
+     //   print_r($stmterror);
+            
+//
+         //    $this->tableGateway->dbAdapter->query('EXEC SP_E_USER_SAVE(?,?,?)',array('meghavisavlia@gmail.com','123123','1'));
          } else {
              if ($this->getUser($id)) {
-                 $this->tableGateway->update($data, array('id' => $id));
+              //   $this->tableGateway->update($data, array('id' => $id));
              } else {
                  throw new \Exception('User id does not exist');
              }

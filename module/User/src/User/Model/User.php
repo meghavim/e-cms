@@ -10,17 +10,17 @@
  class User implements InputFilterAwareInterface
  {
      public $id;
-     public $email;
-     public $password;
-     public $type;
+     public $e_email;
+     public $e_password;
+     public $e_type;
      protected $inputFilter;                       // <-- Add this variable
 
      public function exchangeArray($data)
      {
          $this->id     = (isset($data['id']))     ? $data['id']     : null;
-         $this->email = (isset($data['email'])) ? $data['email'] : null;
-         $this->password = (isset($data['password'])) ? md5($data['password']) : null;
-         $this->type = (isset($data['type'])) ? $data['type'] : null;
+         $this->e_email = (isset($data['e_email'])) ? $data['e_email'] : null;
+         $this->e_password = (isset($data['e_password'])) ? md5($data['e_password']) : null;
+         $this->e_type = (isset($data['e_type'])) ? $data['e_type'] : null;
      }
      
      // Add the following method:
@@ -48,7 +48,7 @@
                  ),
              ));
              $inputFilter->add(array(
-                 'name'     => 'email',
+                 'name'     => 'e_email',
                  'required' => true,
                  'filters'  => array(
                      array('name' => 'StripTags'),
@@ -57,7 +57,7 @@
              ));
 
              $inputFilter->add(array(
-                 'name'     => 'password',
+                 'name'     => 'e_password',
                  'required' => true,
                  'filters'  => array(
                      array('name' => 'StripTags'),
@@ -86,7 +86,7 @@
                      array(
                          'name'    => 'Identical',
                          'options' => array(
-                             'token' => 'password',
+                             'token' => 'e_password',
                              'encoding' => 'UTF-8',
                              'min'      => 3,
                              'max'      => 100,

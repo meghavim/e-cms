@@ -15,14 +15,14 @@
              'type' => 'Hidden',
          ));
          $this->add(array(
-             'name' => 'email',
+             'name' => 'e_email',
              'type' => 'Email',
              'options' => array(
                  'label' => 'Email: ',
              ),
          ));
          $this->add(array(
-             'name' => 'password',
+             'name' => 'e_password',
              'type' => 'Password',
              'options' => array(
                  'label' => 'Password: ',
@@ -36,7 +36,7 @@
              ),
          ));
          $this->add(array(
-             'name' => 'type',
+             'name' => 'e_type',
              'type' => 'select',
              'options' => array(
                  'label' => 'User Type: ',
